@@ -1,0 +1,23 @@
+{
+    "info": {"url": "https://github.com/ispras/juliet-dynamic.git", "short-desc": "", "vcs": "git"},
+    "common": {
+        "build": {"commands": [{"type": "docker", "lines": [
+
+        ]}]},
+        "build-coverage": {"commands": [{"type": "docker", "lines": []}]},
+        "test-type": "ctest",
+        "test": {"commands": [{"type": "docker", "lines": []}]},
+        "test-coverage": {"commands": [{"type": "docker", "lines": []}]},
+        "gcov": {"exclude": [], "commands": [{"type": "docker", "lines": []}]},
+    },
+    "defects": [
+        {
+            "id": 1,
+            "hash": "1",
+            "num_cases": 1,
+            "case": [1],
+            "tags": [],
+            "description": "test",
+        },
+    ],
+}
