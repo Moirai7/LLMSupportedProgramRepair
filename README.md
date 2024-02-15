@@ -1,7 +1,7 @@
 
 # ProgramRepair
 
-# install bugscpp
+# Install bugscpp
 
 Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRepair/edit/main/BugsCpp_README.rst) of bugscpp first. Make sure you have installed:
 - Docker: - Please make sure that the Docker daemon is running in the background.
