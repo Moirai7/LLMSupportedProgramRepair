@@ -108,6 +108,8 @@ class Docker:
         tag = Path(dockerfile).parent.name
         self._container_name: str = f"{tag}-dpp"
         self._tag = f"hschoe/defects4cpp-ubuntu:{tag}"
+        if tag == "juliet":
+            self._tag = f"moirai7/juliet1.3cpp-ubuntu:juliet"
         self._volume: Dict[str, Dict] = {
             str(worktree.host.resolve()): {
                 "bind": str(worktree.container),

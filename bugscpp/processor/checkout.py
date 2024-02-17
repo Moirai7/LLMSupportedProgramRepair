@@ -20,6 +20,7 @@ from processor.core.command import Command
 from processor.core.data import Project
 from processor.core.docker import Docker
 
+import shutil
 
 def _git_clone(path: Path, metadata: taxonomy.MetaData) -> git.Repo:
     """
@@ -53,7 +54,7 @@ def _git_checkout(
             repo.git.worktree("add", "-f", str(checkout_dir.resolve()), defect.hash)
         except git.GitCommandError:
             raise DppGitWorktreeError(repo, str(checkout_dir.resolve()), defect)
-
+        
         # git worktree list --porcelain will output
         # $ worktree path
         # $ ...
@@ -72,6 +73,16 @@ def _git_checkout(
     except git.exc.InvalidGitRepositoryError:
         raise DppGitCheckoutInvalidRepositoryError(repo, str(checkout_dir), defect)
 
+def juliet_checkout(
+    repo: git.Repo, checkout_dir: Path, defect: taxonomy.Defect
+) -> git.Repo:
+    if not checkout_dir.exists():
+        print(repo.working_dir, defect.hash, checkout_dir)
+        shutil.copytree(repo.working_dir+"/testcases/"+defect.hash, checkout_dir / "testcases" / defect.hash)
+        shutil.copytree(repo.working_dir+"/testcasesupport", checkout_dir / "testcasesupport")
+        shutil.copyfile(repo.working_dir+"/CMakeLists.txt", checkout_dir / "CMakeLists.txt")
+        shutil.copyfile(repo.working_dir+"/juliet.py", checkout_dir / "juliet.py")
+        shutil.copyfile(repo.working_dir+"/juliet-run.sh", checkout_dir / "juliet-run.sh")
 
 def _git_am(repo: git.Repo, patches: List[str]):
     """
@@ -103,6 +114,7 @@ def _git_am(repo: git.Repo, patches: List[str]):
         if prev_hash == current_hash:
             raise DppGitPatchNotAppliedError(repo, patch)
         prev_hash = current_hash
+
 
 
 class CheckoutCommand(Command):
@@ -161,23 +173,26 @@ class CheckoutCommand(Command):
             )
             repo = _git_clone(worktree.base / ".repo", metadata)
 
-            message.info(__name__, "git-checkout")
-            message.stdout_progress(f"[{metadata.name}] checking out '{defect.hash}'")
-            checkout_repo = _git_checkout(repo, worktree.host, defect)
-
-            current_hash = checkout_repo.git.rev_parse("--verify", "HEAD")
-            if current_hash == defect.hash:
-                message.info(__name__, "git-am")
-                _git_am(
-                    checkout_repo,
-                    [
-                        defect.common_patch,
-                        defect.split_patch,
-                        defect.buggy_patch if args.buggy else defect.fixed_patch,
-                    ],
-                )
+            if metadata.name == "juliet":
+                juliet_checkout(repo, worktree.host, defect)
             else:
-                message.info(__name__, "git-am skipped")
+                message.info(__name__, "git-checkout")
+                message.stdout_progress(f"[{metadata.name}] checking out '{defect.hash}'")
+                checkout_repo = _git_checkout(repo, worktree.host, defect)
+
+                current_hash = checkout_repo.git.rev_parse("--verify", "HEAD")
+                if current_hash == defect.hash:
+                    message.info(__name__, "git-am")
+                    _git_am(
+                        checkout_repo,
+                        [
+                            defect.common_patch,
+                            defect.split_patch,
+                            defect.buggy_patch if args.buggy else defect.fixed_patch,
+                        ],
+                    )
+                else:
+                    message.info(__name__, "git-am skipped")
 
             # check if there are extra data
             path_to_extra = Path(metadata_base).joinpath(
@@ -192,7 +207,7 @@ class CheckoutCommand(Command):
                     shutil.copytree(
                         extra, Path(worktree.host, extra.stem), dirs_exist_ok=True
                     )
-
+                    
             message.info(__name__, f"creating '.defects4cpp.json' at {worktree.host}")
             # Write .defects4cpp.json in the directory.
             Project.write_config(worktree)

@@ -454,7 +454,6 @@ class TestCommand(DockerCommand):
             if not included_cases:
                 included_cases = set(range(1, selected_defect.num_cases + 1))
             cases = included_cases.difference(excluded_cases)
-
         return TestCommandScriptGenerator(
             selected_defect,
             self.coverage,

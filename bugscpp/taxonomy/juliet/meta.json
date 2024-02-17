@@ -1,23 +1,87 @@
 {
-    "info": {"url": "https://github.com/ispras/juliet-dynamic.git", "short-desc": "", "vcs": "git"},
+    "info": {
+        "url": "https://github.com/moirai7/juliet.git",
+        "short-desc": "juliet c/cpp 1.3",
+        "vcs": "git"
+    },
     "common": {
-        "build": {"commands": [{"type": "docker", "lines": [
-
-        ]}]},
-        "build-coverage": {"commands": [{"type": "docker", "lines": []}]},
+        "build": {
+            "commands": [
+                {
+                    "type": "docker",
+                    "lines": [
+                        "python juliet.py -c -a",
+                        "python juliet.py -g -a",
+                        "python juliet.py -m -a"
+                    ]
+                }
+            ]
+        },
+        "build-coverage": {
+            "commands": [
+                {
+                    "type": "docker",
+                    "lines": [
+                        "python juliet.py -c -a",
+                        "python juliet.py -g -a",
+                        "python juliet.py -m -a"
+                    ]
+                }
+            ]
+        },
         "test-type": "ctest",
-        "test": {"commands": [{"type": "docker", "lines": []}]},
-        "test-coverage": {"commands": [{"type": "docker", "lines": []}]},
-        "gcov": {"exclude": [], "commands": [{"type": "docker", "lines": []}]},
+        "test": {
+            "commands": [
+                {
+                    "type": "docker",
+                    "lines": [
+                        "chmod +x ./bin/juliet-run.sh",
+                        "bash -c \"index=$(cat DPP_TEST_INDEX); python juliet.py -r -a -s $(sed -n \\\"${index}p\\\" .dpp/test_list)\""
+                    ]
+                }
+            ]
+        },
+        "test-coverage": {
+            "commands": [
+                {
+                    "type": "docker",
+                    "lines": [
+                        "chmod +x ./bin/juliet-run.sh",
+                        "python juliet.py -r -a -s 1,2,3,4,5,6"
+                    ]
+                }
+            ]
+        },
+        "gcov": {
+            "exclude": [],
+            "commands": [
+                {
+                    "type": "docker",
+                    "lines": [
+                        "chmod +x ./bin/juliet-run.sh",
+                        "python juliet.py -r -a -s 1,2,3,4,5,6"
+                    ]
+                }
+            ]
+        }
     },
     "defects": [
         {
             "id": 1,
-            "hash": "1",
-            "num_cases": 1,
-            "case": [1],
-            "tags": [],
-            "description": "test",
-        },
-    ],
+            "hash": "CWE835_Infinite_Loop",
+            "num_cases": 6,
+            "case": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "tags": [
+                "CWE"
+            ],
+            "description": "CWE835"
+        }
+    ]
 }

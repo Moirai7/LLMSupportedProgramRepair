@@ -1,6 +1,1 @@
-FROM alpine:latest
-USER root
-
-RUN apk add --update \
-    gcc \
-    make \  
+FROM moirai7/juliet1.3cpp-ubuntu:juliet
