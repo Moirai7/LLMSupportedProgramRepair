@@ -103,9 +103,15 @@ python bugscpp/bugscpp.py build exiv2/buggy-1
 python bugscpp/bugscpp.py test exiv2/buggy-1 
 ```
 
-#### task2: guide LLMs to find the vunlerbility
+#### task2: guide LLMs to find the vulnerability
 
-Bellowing is the initial prompt. Please guide LLMs to find the vunlerbility. Do not directly tell LLMs how to repair the code. Try to find the minimal knowledge you need to provide.
+
+Bellowing is the initial prompt. 
+
+Please guide LLMs to find the vunlerbility. 
+
+Do not directly tell LLMs how to repair the code. Try to find the minimal knowledge you need to provide.
+
 Starting from introducing the vulnerbility, then giving a large scope of possible incorrect lines, and gradually narrowing down the scope.
 
 ```
