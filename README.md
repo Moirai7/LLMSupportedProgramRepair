@@ -1,7 +1,7 @@
 
 # ProgramRepair
 
-# install bugscpp
+# Install bugscpp
 
 Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRepair/edit/main/BugsCpp_README.rst) of bugscpp first. Make sure you have installed:
 - Docker: - Please make sure that the Docker daemon is running in the background.
@@ -16,18 +16,44 @@ make install
 
 ### Simple examples
 
+
+Using bugscpp to test the result:
+```
+python bugscpp/bugscpp.py checkout juliet 1 --buggy
+python bugscpp/bugscpp.py build juliet/buggy-1
+python bugscpp/bugscpp.py test juliet/buggy-1 
+```
+##### task1: guide LLMs to find the vunlerbility
+
+Please guide LLMs to find the vunlerbility. Do not directly tell LLMs how to repair the code. Try to find the minimal knowledge you need to provide.
+Starting from introducing the vulnerbility, then giving a large scope of possible incorrect lines, and gradually narrowing down the scope.
+Here are the test code:
+```
 https://samate.nist.gov/SARD/test-cases/122763/versions/1.0.0
-
 https://samate.nist.gov/SARD/test-cases/122762/versions/1.0.0
-
 https://samate.nist.gov/SARD/test-cases/122761/versions/1.0.0
-
 https://samate.nist.gov/SARD/test-cases/122764/versions/1.0.0
-
 https://samate.nist.gov/SARD/test-cases/122765/versions/1.0.0
-
 https://samate.nist.gov/SARD/test-cases/122766/versions/1.0.0
-
+```
+##### task2: Interactively repair the program
+1. Ask LLMs to repair the program.
+2. Copy the reponse from LLMs to corresponding file
+```
+vim $your_bugscpp_path$/juliet/buggy-1/testcases/filename.c
+```
+3. Recompile the project and test the patch
+```
+python bugscpp/bugscpp.py build juliet/buggy-1
+python bugscpp/bugscpp.py test juliet/buggy-1 
+```
+4. Check whether the generated patch has passed the test case
+5. If not, open the output file, and send the error message to LLMs, and repeat from step 1
+```
+# outpt file is located in
+$your_bugscpp_path$/juliet-buggy-1-*/*.output
+```
+   
 ### Real world case study -- exiv2
 
 #### Test the case study and analyze the vulnerable code
