@@ -17,16 +17,8 @@ make install
 ### Simple examples
 
 
-Using bugscpp to test the result:
-```
-python bugscpp/bugscpp.py checkout juliet 1 --buggy
-python bugscpp/bugscpp.py build juliet/buggy-1
-python bugscpp/bugscpp.py test juliet/buggy-1 
-```
-##### task1: guide LLMs to find the vunlerbility
+#### task1: Read the code and understand what CWE-835 is
 
-Please guide LLMs to find the vunlerbility. Do not directly tell LLMs how to repair the code. Try to find the minimal knowledge you need to provide.
-Starting from introducing the vulnerbility, then giving a large scope of possible incorrect lines, and gradually narrowing down the scope.
 Here are the test code:
 ```
 https://samate.nist.gov/SARD/test-cases/122763/versions/1.0.0
@@ -36,16 +28,60 @@ https://samate.nist.gov/SARD/test-cases/122764/versions/1.0.0
 https://samate.nist.gov/SARD/test-cases/122765/versions/1.0.0
 https://samate.nist.gov/SARD/test-cases/122766/versions/1.0.0
 ```
-##### task2: Interactively repair the program
+
+#### task2: Test the code using bugscpp
+
+Using bugscpp to test the result:
+```
+python bugscpp/bugscpp.py checkout juliet 1 --buggy
+python bugscpp/bugscpp.py build juliet/buggy-1
+python bugscpp/bugscpp.py test juliet/buggy-1 
+```
+
+The name of test file is listed in $your_bugscpp_path/taxonomy/juliet/extra/0001/.dpp/test_list
+
+You may use `-c NUM` to specify a test code, for example,
+```
+python bugscpp/bugscpp.py test juliet/buggy-1 -c 1
+```
+
+The testing result is listed in $your_bugscpp_path/juliet-buggy-1-1
+
+
+#### task3: guide LLMs to find the vulnerability
+
+
+Please guide LLMs to find the vunlerbility. Do not directly tell LLMs how to repair the code. 
+
+Replace the function name and remove comments in the original code. Try to find the minimal knowledge you need to provide.
+
+If LLMs cannot find the vunlerbility, starting from introducing the vulnerbility, then giving a large scope of possible incorrect lines, and gradually narrowing down the scope.
+
+Example initial prompt:
+```
+Explain why the code is not correct:
+void codeexample() 
+{
+    int i = 0;
+    
+    do
+    {
+        printIntLine(i);
+        i = (i + 1) % 256;
+    } while(i >= 0);
+}
+```
+
+#### task4: Interactively repair the program
 1. Ask LLMs to repair the program.
-2. Copy the reponse from LLMs to corresponding file
+2. Copy the response from LLMs to corresponding file
 ```
 vim $your_bugscpp_path$/juliet/buggy-1/testcases/filename.c
 ```
 3. Recompile the project and test the patch
 ```
 python bugscpp/bugscpp.py build juliet/buggy-1
-python bugscpp/bugscpp.py test juliet/buggy-1 
+python bugscpp/bugscpp.py test juliet/buggy-1 -c NUM
 ```
 4. Check whether the generated patch has passed the test case
 5. If not, open the output file, and send the error message to LLMs, and repeat from step 1
@@ -56,7 +92,7 @@ $your_bugscpp_path$/juliet-buggy-1-*/*.output
    
 ### Real world case study -- exiv2
 
-#### Test the case study and analyze the vulnerable code
+#### Task1: Test the case study and analyze the vulnerable code
 
 The correct patch could be found [here](https://github.com/Suresoft-GLaDOS/bugscpp/blob/main/bugscpp/taxonomy/exiv2/patch/0001-buggy.patch).
 Run bellowing commands, try to figure out why this has CWE-835 vunlnerbility.
@@ -67,9 +103,7 @@ python bugscpp/bugscpp.py build exiv2/buggy-1
 python bugscpp/bugscpp.py test exiv2/buggy-1 
 ```
 
-#### LLMs supported Program Repiar
-
-##### task1: guide LLMs to find the vunlerbility
+#### task2: guide LLMs to find the vunlerbility
 
 Bellowing is the initial prompt. Please guide LLMs to find the vunlerbility. Do not directly tell LLMs how to repair the code. Try to find the minimal knowledge you need to provide.
 Starting from introducing the vulnerbility, then giving a large scope of possible incorrect lines, and gradually narrowing down the scope.
@@ -189,9 +223,9 @@ We are testing Exiv2. The following code has a CWE-835 Vunlerbility
     }  // JpegBase::printStructure
 ```
 
-##### task2: Interactively repair the program
+#### task3: Interactively repair the program
 1. Ask LLMs to repair the program.
-2. Copy the reponse from LLMs to corresponding file
+2. Copy the response from LLMs to corresponding file
 ```
 vim $your_bugscpp_path$/exiv2/buggy-1/src/jpgimage.cpp
 ```
