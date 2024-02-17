@@ -92,7 +92,7 @@ $your_bugscpp_path$/juliet-buggy-1-*/*.output
    
 ### Real world case study -- exiv2
 
-#### Task1: Test the case study and analyze the vulnerable code
+#### task1: Test the case study and analyze the vulnerable code
 
 The correct patch could be found [here](https://github.com/Suresoft-GLaDOS/bugscpp/blob/main/bugscpp/taxonomy/exiv2/patch/0001-buggy.patch).
 Run bellowing commands, try to figure out why this has CWE-835 vunlnerbility.
