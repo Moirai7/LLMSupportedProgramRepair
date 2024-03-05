@@ -30,7 +30,10 @@ https://samate.nist.gov/SARD/test-cases/122766/versions/1.0.0
 ```
 
 #### task2: Test the code using bugscpp
-
+First, go to your local directory of this repo
+```
+cd your_path/
+```
 Using bugscpp to test the result:
 ```
 python bugscpp/bugscpp.py checkout juliet 1 --buggy
