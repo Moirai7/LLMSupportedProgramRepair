@@ -34,9 +34,15 @@ First, go to your local directory of this repo
 ```
 cd your_path/
 ```
-Using bugscpp to test the result:
+Using bugscpp to dowload the code:
 ```
 python bugscpp/bugscpp.py checkout juliet 1 --buggy
+```
+
+After downloading, there are a new directory named `juliet`. In the directory, `.repo` is the github repo of the project; `buggy-1` is the first vunlnerbility you will test.
+
+Using bugscpp to build and test the bug:
+```
 python bugscpp/bugscpp.py build juliet/buggy-1
 python bugscpp/bugscpp.py test juliet/buggy-1 
 ```
@@ -49,6 +55,12 @@ python bugscpp/bugscpp.py test juliet/buggy-1 -c 1
 ```
 
 The testing result is listed in $your_bugscpp_path/juliet-buggy-1-1
+
+In the testing result directory, `NUM.output` is the output of the source code; and `NUM.test` is the test result of the source code.
+
+The test file is under `juliet/buggy-1/testcases/CWE835`. In each test file, there is a bad code and a good code. Your goal is to modify the bad code, so it can pass the test.
+
+
 
 
 #### task3: guide LLMs to find the vulnerability
@@ -105,6 +117,15 @@ python bugscpp/bugscpp.py checkout exiv2 1 --buggy
 python bugscpp/bugscpp.py build exiv2/buggy-1
 python bugscpp/bugscpp.py test exiv2/buggy-1 
 ```
+
+Similar as the previous lab, you will find a `exiv2` directory. And `.repo` is the github repo of the project; `buggy-1` is the buggy project. 
+
+The name of test cases is still in `.dpp`. And you can find the test code in `buggy-1/tests/`. Real world project is more complex than the juliet dataset. The test code is not the source code that contains vunlerbilites. These are inputs that will trigger the vunlerbilites in the real world project.
+
+Details of the vunlerbilites are in `bugscpp/taxonomy/exiv2/patch/NUM-buggy.patch`. It lists which file has the vunlerbility and how to modify the file.
+
+In this example, `src/jpgimage.cpp` has issue. So you could go to `exiv2/buggy-1/src/jpgimage.cpp` to find the bug. Your goal is to guild LLMs to locate the vunlerbility in this file and repair this file.
+
 
 #### task2: guide LLMs to find the vulnerability
 
