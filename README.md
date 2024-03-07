@@ -47,14 +47,14 @@ python bugscpp/bugscpp.py build juliet/buggy-1
 python bugscpp/bugscpp.py test juliet/buggy-1 
 ```
 
-The name of test file is listed in $your_bugscpp_path/taxonomy/juliet/extra/0001/.dpp/test_list
+The name of test file is listed in `$your_bugscpp_path/taxonomy/juliet/extra/0001/.dpp/test_list`
 
 You may use `-c NUM` to specify a test code, for example,
 ```
 python bugscpp/bugscpp.py test juliet/buggy-1 -c 1
 ```
 
-The testing result is listed in $your_bugscpp_path/juliet-buggy-1-1
+The testing result is listed in `$your_bugscpp_path/juliet-buggy-1-1`
 
 In the testing result directory, `NUM.output` is the output of the source code; and `NUM.test` is the test result of the source code.
 
