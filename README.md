@@ -89,7 +89,7 @@ void codeexample()
 
 #### task4: Interactively repair the program
 1. Ask LLMs to repair the program.
-2. Copy the response from LLMs to corresponding file
+2. Copy the response from LLMs to corresponding file. **DO NOT MODIFY THE ORIGINAL FUNCTION NAME** Copy the code body to the corresponding file
 ```
 vim $your_bugscpp_path$/juliet/buggy-1/testcases/filename.c
 ```
