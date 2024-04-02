@@ -109,7 +109,7 @@ $your_bugscpp_path$/juliet-buggy-1-*/*.output
 
 #### task1: Test the case study and analyze the vulnerable code
 
-The correct patch could be found [here](https://github.com/Suresoft-GLaDOS/bugscpp/blob/main/bugscpp/taxonomy/exiv2/patch/0001-buggy.patch).
+The correct patch could be found `bugscpp/taxonomy/exiv2/patch/0001-buggy.patch`.
 Run bellowing commands, try to figure out why this has CWE-835 vunlnerbility.
 
 ```
@@ -270,4 +270,46 @@ python bugscpp/bugscpp.py test exiv2/buggy-1
 # outpt file is located in
 $your_bugscpp_path$/exiv2-buggy-1-*/*.output
 ```
-   
+
+## Learning CWE-190
+Please review the code here to understand what is CWE-190:
+https://samate.nist.gov/SARD/test-cases/235788/versions/2.0.0
+
+### Real world case study - exiv2
+
+Please follow the three tasks in previous section: test the code, locate the vunlnerbility, and repair the program. 
+
+The buggy id for this CWE is 4. So you could run the following command to test the bug.
+```
+python bugscpp/bugscpp.py checkout exiv2 4 --buggy
+python bugscpp/bugscpp.py build exiv2/buggy-4
+python bugscpp/bugscpp.py test exiv2/buggy-4
+```
+
+Details of the vunlerbilites are in `bugscpp/taxonomy/exiv2/patch/0004-buggy.patch`. And you can find the source code filename in the patch file, which is src/nikonmn_int.cpp. So you need to find the file and the corresponding incorrect function. 
+
+You goal is to guild GPT to find the incorrect lines and repair the program.
+
+
+## Learning CWE-125
+Please review the code here to understand what is CWE-125:
+https://cwe.mitre.org/data/definitions/125.html
+
+
+### Real world case study - exiv2
+
+Please follow the three tasks in previous section: test the code, locate the vunlnerbility, and repair the program. 
+
+The buggy id for this CWE is 6. So you could run the following command to test the bug.
+```
+python bugscpp/bugscpp.py checkout exiv2 6 --buggy
+python bugscpp/bugscpp.py build exiv2/buggy-6
+python bugscpp/bugscpp.py test exiv2/buggy-6
+```
+
+Details of the vunlerbilites are in `bugscpp/taxonomy/exiv2/patch/0006-buggy.patch`. And you can find the source code filename in the patch file. So you need to find the file and the corresponding incorrect function. 
+
+You goal is to guild GPT to find the incorrect lines and repair the program.
+
+
+
