@@ -47,7 +47,7 @@
                     "type": "docker",
                     "lines": [
                         "chmod +x ./bin/juliet-run.sh",
-                        "python juliet.py -r -a -s 1,2,3,4,5,6"
+                        "bash -c \"index=$(cat DPP_TEST_INDEX); python juliet.py -r -a -s $(sed -n \\\"${index}p\\\" .dpp/test_list)\""
                     ]
                 }
             ]
@@ -59,7 +59,7 @@
                     "type": "docker",
                     "lines": [
                         "chmod +x ./bin/juliet-run.sh",
-                        "python juliet.py -r -a -s 1,2,3,4,5,6"
+                        "bash -c \"index=$(cat DPP_TEST_INDEX); python juliet.py -r -a -s $(sed -n \\\"${index}p\\\" .dpp/test_list)\""
                     ]
                 }
             ]
