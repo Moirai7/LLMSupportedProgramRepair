@@ -21,7 +21,6 @@ After installing vagrant and virtualbox, the following steps are required:
 git clone https://github.com/Moirai7/LLMSupportedProgramRepair.git
 vagrant up
 vagrant ssh #(password: vagrant)
-make install
 ```
 ## option3: 
 if you are using mac M1, M2, and M3, you could use UTM and install an ubuntu VM manually
