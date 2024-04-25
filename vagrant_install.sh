@@ -9,7 +9,8 @@ sudo apt-get install git-all -y
 sudo apt install python3-pip -y
 sudo apt-get install python3-distutils -y
 sudo apt-get install python3-apt -y
-sudo apt-get install build-essential
+sudo apt-get install build-essential -y
+sudo apt install python-is-python3 -y
 
 make install
 python3.9 -m pip install -r requirements.txt

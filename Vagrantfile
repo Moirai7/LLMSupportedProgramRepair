@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "kwilczynski/ubuntu-20.04-docker"
-  config.vm.synced_folder ".", "/home/vagrant"
+  #config.vm.synced_folder ".", "/home/vagrant/LLMSupportedProgramRepair", type: "rsync", rsync__exclude: ".git/", rsync__args: ["--verbose", "--rsync-path='sudo rsync'", "--archive", "--delete", "-z"]
   config.vm.provision :shell, path: "vagrant_install.sh"
 
 
