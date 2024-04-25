@@ -11,7 +11,7 @@ Make sure you have installed:
 
 ```
 git clone https://github.com/Moirai7/LLMSupportedProgramRepair.git
-make install
+cd LLMSupportedProgramRepair & make install
 ```
 ## option 2: If your computer does not support AMD 
 
@@ -23,8 +23,10 @@ vagrant up
 vagrant ssh #(password: vagrant)
 ```
 Every time when you run `vagrant up`, you have opened the vm(check out your vituralbox desktop).
-And when you run `vagrant ssh`, you have logged to the vm. Your local file has automatically synced with the vm.
-So when you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & varant ssh`.
+And when you run `vagrant ssh`, you have logged to the vm. 
+Next, you could clone this repo, and run `make install`,
+
+When you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & vagrant ssh`. And make sure you are modifying files in the VM instead of your local files.
 
 ## option3: 
 if you are using mac M1, M2, and M3, you could use UTM and install an ubuntu VM manually
