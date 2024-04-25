@@ -3,7 +3,9 @@
 
 # Install bugscpp
 
-Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRepair/edit/main/BugsCpp_README.rst) of bugscpp first. Make sure you have installed:
+## option 1: If your computer support AMD
+Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRepair/edit/main/BugsCpp_README.rst) of bugscpp first. 
+Make sure you have installed:
 - Docker: - Please make sure that the Docker daemon is running in the background.
 - Python version >= 3.9
 
@@ -11,6 +13,22 @@ Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRep
 git clone https://github.com/Moirai7/LLMSupportedProgramRepair.git
 make install
 ```
+## option 2: If your computer does not support AMD 
+
+For easy setup, if your computer supports virtualbox, you may use vagrant to install an ubuntu VM.
+After installing vagrant(https://developer.hashicorp.com/vagrant/downloads) and virtualbox(https://www.virtualbox.org/), the following steps are required:
+```
+git clone https://github.com/Moirai7/LLMSupportedProgramRepair.git
+vagrant up
+vagrant ssh #(password: vagrant)
+```
+Every time when you run `vagrant up`, you have opened the vm(check out your vituralbox desktop).
+And when you run `vagrant ssh`, you have logged to the vm. Your local file has automatically synced with the vm.
+So when you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & varant ssh`.
+
+## option3: 
+if you are using mac M1, M2, and M3, you could use UTM and install an ubuntu VM manually
+
 
 ## Learning CWE-835
 
