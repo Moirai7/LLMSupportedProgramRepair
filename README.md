@@ -1,6 +1,7 @@
 
 # ProgramRepair
 
+
 # Install bugscpp
 
 ## option 1: If your computer support AMD
@@ -31,6 +32,16 @@ When you run the following experiments("python3.9 bugscpp.py ..."), make sure yo
 ## option3: 
 if you are using mac M1, M2, and M3, you could use UTM and install an ubuntu VM manually
 
+## Notes:
+1. Please save the interatcion between you and Chatgpt.
+2. For each bugs, your report should answer the following questions:
+- Content Understanding: Explain what CWE-xxx is using in this code
+- Content Understanding: Explain the output and why these test cases are failed before you repair the code.
+- Content Understanding: Explain the output of ChatGPT. Is it correct? Does ChatGPT understand the logic of the code?
+- Content Understanding: Attach the interactive conversation. Can ChatGPT repair the code? If the patch is not correct, why? What kind of information is required to repair the code?
+- Feedback: Considering the relation between task3(identify vulnerability) and task4(repair program), after locating the vulnerable code, does this help to improve the performance of repairing the program?
+- Completion Rates: Did you successfully guide ChatGPT to repair the program?
+- Student Reflections: What have you learned in this Lab?
 
 ## Learning CWE-835
 
