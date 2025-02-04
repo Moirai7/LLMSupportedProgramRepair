@@ -30,7 +30,16 @@ Next, you could clone this repo, and run `make install`,
 When you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & vagrant ssh`. And make sure you are modifying files in the VM instead of your local files.
 
 ## option3: 
-[vitural box has supported mac silicon](https://www.virtualbox.org/)
+If you are using mac M1, M2, and M3 (still cannot work😭):
+1. Download [VMware Fusion 12 Player][https://services.tctc.edu/TDClient/323/InfoTech/KB/ArticleDet?ID=21304] for macOS
+2. Use license key from your myVMware account and install the application
+3. Allow VMware Fusion to control system events within the app when prompted
+4. Enable the accessibility preference at System Preferences > Security & Privacy > Accessibility > VMware Fusion
+5. Install [vagrant][https://www.vagrantup.com/downloads]: `brew tap hashicorp/tap && brew install vagrant`
+7. Install the [vagrant-vmware-desktop plugin][5]: `vagrant plugin install vagrant-vmware-desktop` (if you got error: `export VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1`)
+9. Install the [VMware utility][6] for vagrant: `brew install --cask vagrant-vmware-utility`
+10. Navigate to the folder containing the Vagrantfile and run `vagrant up --provider=vmware_desktop`. The command might fail on the first run, so try running the same command again.
+11. Run `vagrant ssh` to login to the vagrant box. Profit! 
 
 ## Notes:
 1. Please save the interatcion between you and Chatgpt.
