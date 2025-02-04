@@ -5,7 +5,7 @@
 # Install bugscpp
 
 ## option 1: If your computer support AMD
-Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRepair/edit/main/BugsCpp_README.rst) of bugscpp first. 
+Please read the [requirements](https://github.com/Moirai7/LLMSupportedProgramRepair/blob/main/BugsCpp_README.rst) of bugscpp first. 
 Make sure you have installed:
 - Docker: - Please make sure that the Docker daemon is running in the background.
 - Python version >= 3.9
