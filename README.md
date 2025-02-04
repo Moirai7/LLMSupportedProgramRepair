@@ -30,7 +30,7 @@ Next, you could clone this repo, and run `make install`,
 When you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & vagrant ssh`. And make sure you are modifying files in the VM instead of your local files.
 
 ## option3: 
-if you are using mac M1, M2, and M3, you could use UTM and install an ubuntu VM manually
+[vitural box has supported mac silicon](https://www.virtualbox.org/)
 
 ## Notes:
 1. Please save the interatcion between you and Chatgpt.
