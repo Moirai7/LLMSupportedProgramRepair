@@ -12,7 +12,8 @@ Make sure you have installed:
 
 ```
 git clone https://github.com/Moirai7/LLMSupportedProgramRepair.git
-cd LLMSupportedProgramRepair & make install
+cd LLMSupportedProgramRepair
+make install
 ```
 ## option 2: If your computer does not support AMD 
 
@@ -25,10 +26,14 @@ vagrant ssh #(password: vagrant)
 ```
 Every time when you run `vagrant up`, you have opened the vm(check out your vituralbox desktop).
 And when you run `vagrant ssh`, you have logged to the vm. 
+if it's the first time you login to the vm, run
+```
+cd LLMSupportedProgramRepair
+bash vagrant_install.sh
+```
 Next, you could clone this repo, and run `make install`,
 
-When you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & vagrant ssh`. And make sure you are modifying files in the VM instead of your local files.
-
+When you run the following experiments("python3.9 bugscpp.py ..."), make sure you have run `vagrant up & vagrant ssh`. 
 ## option3: 
 If you are using mac M1, M2, and M3 (still cannot work😭):
 1. Download [VMware Fusion 12 Player][https://services.tctc.edu/TDClient/323/InfoTech/KB/ArticleDet?ID=21304] for macOS
